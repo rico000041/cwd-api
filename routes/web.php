@@ -14,4 +14,3 @@
 Route::resource('/notes','NoteController');
 Route::resource('/todos','TodoController');
 Route::get('/about-us','ViewController@about');
-
