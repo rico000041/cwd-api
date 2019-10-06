@@ -8,14 +8,15 @@ use App\Todo;
 
 class ViewController extends Controller
 {
-    /*//
+    //
 
- 	public function about(){
- 		return view('about-us');
- 	}*/
+ 	
  	public function viewNotes(){
  		$notes = Note::all();
         $response = response()->json($notes,200);   //ok
         return view('welcome',compact('notes'));
+ 	}
+ 	public function about(){
+ 		return view('about-us');
  	}
 }
