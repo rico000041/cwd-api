@@ -13,5 +13,4 @@
 
 Route::resource('/notes','NoteController');
 Route::resource('/todos','TodoController');
-Route::get('/notes','ViewController@viewNotes');
-Route::get('about-us','ViewController@about');
+Route::get('/about-us','ViewController@about');

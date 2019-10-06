@@ -16,7 +16,7 @@ class ViewController extends Controller
         return view('welcome',compact('notes'));
  	}
  	public function about(){
- 		return view('about');
+ 		return view('about-us');
  		
  	}
 }
