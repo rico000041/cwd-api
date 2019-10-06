@@ -1,10 +1,11 @@
-@extends('nav.header')
-	<h1>@yield('header','Home')</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Home Page
+	</title>
+</head>
+<body>
 
-	<ul>
-		<a href="/"><li>Home</li></a>
-		<a href="/about"><li>About</li></a>
-		<a href="/contact"><li>Contact</li></a>
-
-	</ul>
-	@yield('content')
+</body>
+</html>

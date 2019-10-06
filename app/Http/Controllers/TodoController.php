@@ -12,9 +12,11 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         //
+
     }
 
     /**
@@ -27,7 +29,7 @@ class TodoController extends Controller
         //
     }
 
-    /**
+    /**$response = response()->json(Note::create($request->all()),201);
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +37,9 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $response = response()->json(Todo::create($request->all(),201));
+        return back();
     }
 
     /**
@@ -69,7 +73,16 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        if($todo->isCompleted){
+            $todo->isCompleted = 0;
+        }
+        else{
+            $todo->isCompleted = 1;
+        }
+        $todo->save();
+
+        return back();
+
     }
 
     /**

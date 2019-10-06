@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title> </title>
-</head>
-<body>
-
-    <div class="container"> 
-        <form action = "/api/notes" method = "POST">  
-            @method('POST')
-            @csrf
-
-            <div>   
-                <input type="text" name="title" required>
-                <input type="text" name="body" required>
-                <input type="submit" name="">
-            </div>
-
-        </form>
-    </div>
+@extends('layout')
+    @section('title','Home')
+    @section('mainTitle','Home Page')
+    @section('content')
+    
     <div class="container">
-        <ul>
+        <br/><br/>
         @foreach($notes as $note)
-            <li><a href= "/api/notes/{{$note->id}}">{{ $note->title }}</a></li>
+            <h1 class="title is-3"><a href= "/notes/{{$note->id}}">{{ $note->title }}</a></h1>
+            <p class="subtitle">{{$note->description}}</p>
         @endforeach
-        </ul>
+
+
     </div>  
-</body>
-</html>
+    @endsection

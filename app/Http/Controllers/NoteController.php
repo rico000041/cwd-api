@@ -28,7 +28,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-
+        return view('create');
 
     }
 
@@ -44,7 +44,7 @@ class NoteController extends Controller
         $response = response()->json(Note::create($request->all()),201);
 
         $notes = Note::all();
-        return back();
+        return redirect()->action('NoteController@index');
 
     }
 
@@ -54,12 +54,14 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($note_id)
     {
-        $note = Note::find($id);
-        $response =  response()->json($note,200);
 
-        return view('view',compact('note'));
+        $note = Note::find($note_id);
+        $response =  response()->json($note,200);
+        $todos = $note->todos;
+        
+        return view('view',compact('note','todos'));
     }
 
     /**
