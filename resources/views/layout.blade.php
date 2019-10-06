@@ -49,7 +49,7 @@
                             </span>
                             
                             <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="/about-us">
+                                <a class="button is-white is-outlined" href="/#">
                                     <span class="icon">
                                         <i class="fa fa-github"></i>
                                     </span>
