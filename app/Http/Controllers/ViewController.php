@@ -17,6 +17,5 @@ class ViewController extends Controller
  	}
  	public function about(){
  		return view('about-us');
- 		
  	}
 }
