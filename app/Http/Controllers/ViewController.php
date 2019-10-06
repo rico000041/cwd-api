@@ -15,4 +15,8 @@ class ViewController extends Controller
         $response = response()->json($notes,200);   //ok
         return view('welcome',compact('notes'));
  	}
+ 	public function about(){
+ 		return view('about');
+ 		
+ 	}
 }
