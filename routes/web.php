@@ -1,6 +1,6 @@
 <?php
 
-/*
+/*note
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -12,3 +12,5 @@
 */
 
 Route::resource('/notes','NoteController');
+Route::resource('/todos','TodoController');
+Route::get('/notes','ViewController@viewNotes');

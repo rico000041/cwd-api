@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Todo;
+use App\Note;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -61,7 +62,8 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
-        //
+        return view('editTodos',compact('todo'));
+
     }
 
     /**
@@ -73,15 +75,29 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        if($todo->isCompleted){
-            $todo->isCompleted = 0;
+        if(request('validator') =="checkbox"){
+            if($todo->isCompleted){
+                $todo->isCompleted = 0;
+            }
+            else{
+                $todo->isCompleted = 1;
+            }
+            $todo->save();
+
+            return back();
         }
         else{
-            $todo->isCompleted = 1;
-        }
-        $todo->save();
+            request()->validate([
+            'description' => 'required:min:10'
+            ]);
 
-        return back();
+            $todo->update($request->all());
+            $response = response()->json($todo,200);    //ok 
+            return redirect('/notes/'.$todo->note->id);
+           // return redirect()->action('NoteController@show',['note_id' => $todo->note->id]);
+       
+        }
+        
 
     }
 
@@ -93,6 +109,11 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        $response = response()->json(null, 204);    //deleted
+
+        return back()->with('response');
+
+
     }
 }

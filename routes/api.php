@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource("/notes","NoteController");
-Route::resource("/todos","TodoController");
+Route::apiResource("notes","NoteController");
+Route::apiResource("todos","TodoController");

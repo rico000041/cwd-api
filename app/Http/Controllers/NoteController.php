@@ -16,6 +16,7 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Note::all();
+        $response = response()->json($notes,200);   //ok
         return view('welcome',compact('notes'));
 
     }
@@ -40,10 +41,12 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-
+        request()->validate([
+            'title' => 'required|min:8',
+            'description' => 'required:min:10'
+        ]);
         $response = response()->json(Note::create($request->all()),201);
-
-        $notes = Note::all();
+        
         return redirect()->action('NoteController@index');
 
     }
@@ -52,7 +55,7 @@ class NoteController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respons
      */
     public function show($note_id)
     {
@@ -61,7 +64,7 @@ class NoteController extends Controller
         $response =  response()->json($note,200);
         $todos = $note->todos;
         
-        return view('view',compact('note','todos'));
+        return view('view',compact('note','todos','response'));
     }
 
     /**
@@ -70,9 +73,10 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Note $note)
     {
-        //
+
+        return view('editNotes',compact('note'));
     }
 
     /**
@@ -84,10 +88,16 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
+        request()->validate([
+            'title' => 'required|min:8',
+            'description' => 'required:min:10'
+        ]);
+
         $note->update($request->all());
         $response = response()->json($note,200);    //ok 
-        $notes = Note::all();
-        return view('welcome',compact('notes','response'));
+        
+        return redirect('/notes/');
+        //return redirect()->action('NoteController@index'/*,['response' => $response]*/);
     }
 
     /**
@@ -102,7 +112,6 @@ class NoteController extends Controller
         $note->delete();
         $response = response()->json(null, 204);    //deleted
 
-        $notes = Note::all();
-        return view('welcome',compact('notes','response'));
+        return back();
     }
 }

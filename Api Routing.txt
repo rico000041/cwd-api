@@ -1,0 +1,32 @@
+Cwd-Api
+
+API
+
+Notes
+
+POST 	/api/notes/			Store Notes to the Database				Provide key Title, Description
+PATCH	/api/notes/{id}		Update Existing Notes 					Provide key Title, Description
+DELETE	/api/notes/{id}		Delete Existing notes 					
+
+Todos
+
+POST 	/api/todos/			Store Notes to the Database				Provide key Description
+PATCH	/api/todos/{id}		Update Existing Notes 					Provide key Description
+DELETE	/api/todos/{id}		Delete Existing Notes
+
+
+WEB
+
+Notes
+
+GET		/notes/				Get All the Notes from Database	
+GET 	/notes/{id} 		Get Specific Notes by Id
+GET 	/notes/create		Go to the Create Page
+GET 	/notes/{id}/edit	Edit Specific Notes by Id	
+
+Todos
+
+GET		/todos/				Get All the Notes from Database	
+GET 	/todos/{id} 		Get Specific Notes by Id
+GET 	/todos/create		Go to the Create Page
+GET 	/todos/{id}/edit	Edit Specific Notes by Id

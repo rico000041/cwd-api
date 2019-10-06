@@ -4,16 +4,18 @@
     @section('content')
 
 @section('content')
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-6 is-offset-3">
-                    <h1 class="title">
-                        {{$note->title}}
-                    </h1>
-                    <h2 class="subtitle">
-                        {{$note->description}}
-                    </h2>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                
+                <h1 class="title">{{$note->title}}</h1>
+                <h2 class="subtitle">{{$note->description}}</h2>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                     <div class="box">
                             <form id = 'editForm' action = "/api/todos" class="form-field" method = "POST">  
                                 @method('POST')
@@ -37,17 +39,9 @@
                               </div>
                             </form>
                         </div>   
-                    </div>
-                </div>
             </div>
-        </div>
-
-        
-         <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-6 is-offset-3">
-
-                    <div class="box">
+            <div class="col-sm-6">
+                <div class="box">
                            
                               <h1 class="is-3 title " style="color:black">Todos List</h1>
                               <table class="table is-bordered">   
@@ -67,32 +61,39 @@
                                     @foreach($note->todos as $todo)
 
                                     <tr>
-                                        
+                                            
                                             <td>{{$todo->id}}</td>
                                             <td>{{$todo->description}}</td>
                                             <td> 
                                                 <form id= "editForm" method="POST" action="/api/todos/{{$todo->id}}"> 
                                                 @method('PATCH')
                                                 @csrf
-                                                <input type="checkbox" onChange="this.form.submit()" value = "{{$todo->isCompleted}}" name="isCompleted" 
+                                                <input class = "checkbox center" type="checkbox" onChange="this.form.submit()" value = "{{$todo->isCompleted}}" name="isCompleted" 
                                                 <?= $todo->isCompleted ?
-                                                    'checked' : '' ?> 
+                                                    'checked' : '' ?> />
+                                                <input type="hidden" name="validator" value="checkbox" />
                                             
                                             </td>
                                             </form>
-                                            <td>{{$todo->id}}</td>
-                                            <td>{{$todo->id}}</td>
-                                            
+                                            <form method="GET" action = "/todos/{{$todo->id}}/edit">
+                                            <td> <button class="center button btn-success" type="submit">Edit</button></td>
+                                            </form>
+                                            <form method="POST" action="/api/todos/{{$todo->id}}">
+                                            @method("DELETE")
+                                            <td><button class = "center button btn-danger" type="submit">Delete</button></td>
+                                            </form>
+
                                     </tr>
                                     @endforeach
                                     
                                 </tbody>
                               </table>
-                            
 
                         </div>   
-                    </div>
-                </div>
             </div>
         </div>
+        
+    </div>
+
+       
 @endsection
